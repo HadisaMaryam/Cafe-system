@@ -1,0 +1,62 @@
+class MenuItem:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+
+class Menu:
+    def __init__(self):
+        self.items = []
+
+    def add_item(self, item):
+        self.items.append(item)
+
+    def display_menu(self):
+        print("\n---- Menu ----")
+        for idx, item in enumerate(self.items, start=1):
+            print(f"{idx}. {item.name} - ${item.price:.2f}")
+
+class Order:
+    def __init__(self):
+        self.ordered_items = []
+
+    def add_to_order(self, item):
+        self.ordered_items.append(item)
+
+    def display_order(self):
+        print("\n---- Your Order ----")
+        total = 0
+        for item in self.ordered_items:
+            print(f"{item.name} - ${item.price:.2f}")
+            total += item.price
+        print(f"Total: ${total:.2f}")
+
+class CafeSystem:
+    def __init__(self):
+        self.menu = Menu()
+        self.order = Order()
+
+    def run(self):
+        # Add menu items
+        self.menu.add_item(MenuItem("Coffee", 2.50))
+        self.menu.add_item(MenuItem("Tea", 1.75))
+        self.menu.add_item(MenuItem("Sandwich", 3.50))
+        self.menu.add_item(MenuItem("Cake", 2.00))
+
+        while True:
+            self.menu.display_menu()
+            choice = input("Select item number to add to order (or 'q' to quit): ")
+
+            if choice.lower() == 'q':
+                break
+            elif choice.isdigit() and 1 <= int(choice) <= len(self.menu.items):
+                item = self.menu.items[int(choice) - 1]
+                self.order.add_to_order(item)
+                print(f"Added {item.name} to your order.")
+            else:
+                print("Invalid choice. Try again.")
+
+        self.order.display_order()
+
+# Run the program
+cafe = CafeSystem()
+cafe.run()
