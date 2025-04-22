@@ -1,7 +1,8 @@
 class MenuItem:
-    def __init__(self, name, price):
+    def __init__(self, name, price, category):
         self.name = name
         self.price = price
+        self. category=category
 
 class Menu:
     def __init__(self):
@@ -37,10 +38,10 @@ class CafeSystem:
 
     def run(self):
         # Add menu items
-        self.menu.add_item(MenuItem("Coffee", 2.50))
-        self.menu.add_item(MenuItem("Tea", 1.75))
-        self.menu.add_item(MenuItem("Sandwich", 3.50))
-        self.menu.add_item(MenuItem("Cake", 2.00))
+        self.menu.add_item(MenuItem("Coffee", 2.50,"Drink"))
+        self.menu.add_item(MenuItem("Tea", 1.75,"Drink"))
+        self.menu.add_item(MenuItem("Sandwich", 3.50,"Food"))
+        self.menu.add_item(MenuItem("Cake", 2.00,"Food"))
 
         while True:
             self.menu.display_menu()
